@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { Journey } from './journey.entity';
 
-interface EmployeeProps {
+export interface EmployeeData {
   id?: string;
   name: string;
   registrationNumber: string;
@@ -13,7 +13,7 @@ export class Employee {
   private _registrationNumber: string;
   private _journey?: Journey;
 
-  constructor({ name, registrationNumber, id }: EmployeeProps) {
+  constructor({ name, registrationNumber, id }: EmployeeData) {
     this._id = randomUUID() ?? id;
     this._name = name;
     this._registrationNumber = registrationNumber;
