@@ -9,23 +9,23 @@ describe('Journey entity', () => {
     eventData: {},
   };
   it('should create a new journey', () => {
-    const name = 'journey';
+    const slug = 'journey';
 
     const journey = new Journey({
-      name: name,
+      slug: slug,
       dispatcher: eventDispatcher,
       startEvent,
     });
 
-    expect(journey.name).toBe(name);
+    expect(journey.slug).toBe(slug);
     expect(journey.id).toBeDefined();
   });
 
   it('should start a journey', () => {
-    const name = 'journey';
+    const slug = 'journey';
 
     const journey = new Journey({
-      name: name,
+      slug: slug,
       dispatcher: eventDispatcher,
       startEvent,
     });

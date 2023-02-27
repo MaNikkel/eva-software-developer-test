@@ -17,11 +17,11 @@ describe('Employee entity', () => {
   });
 
   it('should link a journey to an Employee', () => {
-    const journeyName = 'journey';
+    const journeySlug = 'journey';
 
     const employee = new Employee({ name: 'Dummy', registrationNumber: '123' });
     const journey = new Journey({
-      name: journeyName,
+      slug: journeySlug,
       dispatcher: eventDispatcher,
       startEvent: <IEvent>{},
     });
@@ -31,6 +31,6 @@ describe('Employee entity', () => {
     employee.linkJourney(journey);
 
     expect(employee.journey).toBeInstanceOf(Journey);
-    expect(employee.journey.name).toBe(journeyName);
+    expect(employee.journey.slug).toBe(journeySlug);
   });
 });
