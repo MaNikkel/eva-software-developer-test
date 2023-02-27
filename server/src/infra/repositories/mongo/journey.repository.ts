@@ -1,6 +1,5 @@
 import { Collection } from 'mongodb';
 import { MongoClient } from 'src/config/database/mongo-config';
-import { Journey } from '../../../domain/entities/journey.entity';
 import { JourneyRepository } from '../../../domain/repository/journey.repository';
 
 export class MongoJourneyRepository implements JourneyRepository {
@@ -17,7 +16,7 @@ export class MongoJourneyRepository implements JourneyRepository {
     });
   }
 
-  async listAllSlugs(): Promise<{ name: string; slug: string }[]> {
+  async listAll(): Promise<{ name: string; slug: string }[]> {
     const result = await this.journeyCollection.find().toArray();
 
     return result.map((r) => ({ slug: r?.slug, name: r?.name }));

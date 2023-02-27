@@ -26,7 +26,7 @@ describe('Mongo Journey Repository', () => {
 
   afterEach(async () => await collection.deleteMany());
   it('should list all available journey slugs', async () => {
-    const availableJourneys = await journeyRepository.listAllSlugs();
+    const availableJourneys = await journeyRepository.listAll();
 
     expect(availableJourneys.length).toEqual(recordsToAdd.length);
   });

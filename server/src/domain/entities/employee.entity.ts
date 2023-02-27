@@ -14,7 +14,7 @@ export class Employee {
   private _journey?: Journey;
 
   constructor({ name, registrationNumber, id }: EmployeeData) {
-    this._id = randomUUID() ?? id;
+    this._id = id ?? randomUUID();
     this._name = name;
     this._registrationNumber = registrationNumber;
   }
