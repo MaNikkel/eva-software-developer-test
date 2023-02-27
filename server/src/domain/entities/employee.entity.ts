@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { Journey } from './journey.entity';
 
 interface EmployeeProps {
   id?: string;
@@ -10,6 +11,7 @@ export class Employee {
   private _id;
   private _name: string;
   private _registrationNumber: string;
+  private _journey?: Journey;
 
   constructor({ name, registrationNumber, id }: EmployeeProps) {
     this._id = randomUUID() ?? id;
@@ -27,5 +29,13 @@ export class Employee {
 
   get id(): string {
     return this._id;
+  }
+
+  get journey(): Journey | undefined {
+    return this._journey;
+  }
+
+  public linkJourney(journey: Journey): void {
+    this._journey = journey;
   }
 }
