@@ -2,9 +2,12 @@ import { IEventDispatcher } from 'src/adapters/event/dispatcher.event';
 import { IEvent } from 'src/adapters/event/event';
 import { EmployeeData } from '../../entities/employee.entity';
 import { Journey } from '../../entities/journey.entity';
-import { SendWelcomeEmailHandler } from './events/handlers/send-welcome-email.event';
+import { SendWelcomeEmailHandler } from './events/handlers/send-welcome-email.handler';
 import { AdmissionJourneyStartedEvent } from './events/admission-journey-started.event';
 import { SendDocumentsRequestHandler } from './events/handlers/send-documents-request.handler';
+import { AdmissionJourneyWelcomeEmailSendEvent } from './events/admission-journey-welcome-email-send.event';
+import { FinishAdmissionJourneyHandler } from './events/handlers/finish-admission-journey.handler';
+import { AdmissionJourneyFinishedEvent } from './events/admission-journey-finished.event';
 
 interface AdmissionJourneyFactoryProps {
   dispatcher: IEventDispatcher;
@@ -36,7 +39,12 @@ export class AdmissionJourneyFactory {
 
     journey.addActionOnEvent(
       new SendDocumentsRequestHandler(this._dispatcher),
-      'AdmissionJourneyWelcomeEmailSendEvent',
+      AdmissionJourneyWelcomeEmailSendEvent.name,
+    );
+
+    journey.addActionOnEvent(
+      new FinishAdmissionJourneyHandler(this._dispatcher),
+      AdmissionJourneyFinishedEvent.name,
     );
 
     return journey;

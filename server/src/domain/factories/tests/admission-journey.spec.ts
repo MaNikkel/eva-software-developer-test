@@ -19,7 +19,7 @@ describe('Admission Journey', () => {
     expect(journey).toBeDefined();
   });
 
-  it('should start the journey journey', async () => {
+  it('should start the admission journey', async () => {
     journey = new AdmissionJourneyFactory({
       dispatcher: eventDispatcher,
       data: { name: 'Dummy', registrationNumber: '123' },
