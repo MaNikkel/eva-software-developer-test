@@ -20,7 +20,7 @@ export class Journey {
   private _startEvent: IEvent;
 
   constructor({ slug, id, startEvent, dispatcher, name }: JourneyProps) {
-    this._id = randomUUID() ?? id;
+    this._id = id ?? randomUUID();
     this._slug = slug;
     this._name = name;
     this._dispatcher = dispatcher;
