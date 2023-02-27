@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb';
 import { MongoClient } from '../../../config/database/mongo-config';
 import { Employee } from '../../../domain/entities/employee.entity';
-import { Journey } from '../../../domain/entities/journey.entity';
+import { Journey } from '../../../domain/value-objects/journey.valueobject';
 import { EmployeeRepository } from '../../../domain/repository/employee.repository';
 
 export class MongoEmployeeRepository implements EmployeeRepository {

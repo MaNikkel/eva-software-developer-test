@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Journey } from './journey.entity';
+import { Journey } from '../value-objects/journey.valueobject';
 
 export interface EmployeeData {
   id?: string;

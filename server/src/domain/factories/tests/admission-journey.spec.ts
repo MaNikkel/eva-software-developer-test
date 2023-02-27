@@ -1,6 +1,6 @@
 import { AdmissionJourneyFactory } from '../admission-journey/admission-journey.factory';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
-import { Journey } from 'src/domain/entities/journey.entity';
+import { Journey } from 'src/domain/value-objects/journey.valueobject';
 
 describe('Admission Journey', () => {
   const eventDispatcher = new InMemoryEventDispatcher();

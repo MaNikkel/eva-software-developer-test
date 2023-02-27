@@ -1,7 +1,7 @@
 import { IEventDispatcher } from 'src/adapters/event/dispatcher.event';
 import { IEvent } from 'src/adapters/event/event';
 import { EmployeeData } from '../../entities/employee.entity';
-import { Journey } from '../../entities/journey.entity';
+import { Journey } from '../../value-objects/journey.valueobject';
 import { SendWelcomeEmailHandler } from './events/handlers/send-welcome-email.handler';
 import { AdmissionJourneyStartedEvent } from './events/admission-journey-started.event';
 import { SendDocumentsRequestHandler } from './events/handlers/send-documents-request.handler';
@@ -24,11 +24,10 @@ export class AdmissionJourneyFactory {
     this._startJourneyEvent = new AdmissionJourneyStartedEvent(data);
   }
 
-  create(id?: string): Journey {
+  create(): Journey {
     const journey = new Journey({
       slug: 'admission-journey',
       name: 'Jornada da Admissão',
-      id: id,
       dispatcher: this._dispatcher,
       startEvent: this._startJourneyEvent,
     });

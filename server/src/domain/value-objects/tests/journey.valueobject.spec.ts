@@ -1,4 +1,4 @@
-import { Journey } from '../journey.entity';
+import { Journey } from '../journey.valueobject';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
 import { IEvent } from '../../../adapters/event/event';
 
@@ -19,7 +19,6 @@ describe('Journey entity', () => {
     });
 
     expect(journey.slug).toBe(slug);
-    expect(journey.id).toBeDefined();
   });
 
   it('should start a journey', () => {

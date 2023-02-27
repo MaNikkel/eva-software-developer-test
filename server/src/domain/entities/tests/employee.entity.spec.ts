@@ -1,7 +1,7 @@
 import { IEvent } from '../../../adapters/event/event';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
 import { Employee } from '../employee.entity';
-import { Journey } from '../journey.entity';
+import { Journey } from '../../value-objects/journey.valueobject';
 
 describe('Employee entity', () => {
   const eventDispatcher = new InMemoryEventDispatcher();
