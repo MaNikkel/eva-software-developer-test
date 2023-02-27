@@ -24,6 +24,7 @@ describe('Employee entity', () => {
       slug: journeySlug,
       dispatcher: eventDispatcher,
       startEvent: <IEvent>{},
+      name: 'dummy',
     });
 
     expect(employee.journey).toBe(undefined);

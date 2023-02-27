@@ -15,6 +15,7 @@ describe('Journey entity', () => {
       slug: slug,
       dispatcher: eventDispatcher,
       startEvent,
+      name: 'dummy',
     });
 
     expect(journey.slug).toBe(slug);
@@ -26,6 +27,7 @@ describe('Journey entity', () => {
 
     const journey = new Journey({
       slug: slug,
+      name: 'dummy',
       dispatcher: eventDispatcher,
       startEvent,
     });

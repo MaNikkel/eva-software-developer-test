@@ -27,6 +27,7 @@ export class AdmissionJourneyFactory {
   create(id?: string): Journey {
     const journey = new Journey({
       slug: 'admission-journey',
+      name: 'Jornada da Admissão',
       id: id,
       dispatcher: this._dispatcher,
       startEvent: this._startJourneyEvent,

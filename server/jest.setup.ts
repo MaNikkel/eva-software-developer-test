@@ -8,7 +8,7 @@ let mongod: MongoMemoryServer;
 beforeAll(async () => {
   mongod = await MongoMemoryServer.create({
     instance: {
-      dbName: 'psicorganizer-auth',
+      dbName: 'eva-test',
     },
   });
 

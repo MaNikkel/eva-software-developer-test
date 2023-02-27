@@ -6,25 +6,33 @@ import { IEventHandler } from '../../adapters/event/handler.event';
 interface JourneyProps {
   id?: string;
   slug: string;
+  name: string;
+
   dispatcher: IEventDispatcher;
   startEvent: IEvent;
 }
 
 export class Journey {
   private _slug: string;
+  private _name: string;
   private _id: string;
   private _dispatcher: IEventDispatcher;
   private _startEvent: IEvent;
 
-  constructor({ slug, id, startEvent, dispatcher }: JourneyProps) {
+  constructor({ slug, id, startEvent, dispatcher, name }: JourneyProps) {
     this._id = randomUUID() ?? id;
     this._slug = slug;
+    this._name = name;
     this._dispatcher = dispatcher;
     this._startEvent = startEvent;
   }
 
   get slug() {
     return this._slug;
+  }
+
+  get name() {
+    return this._name;
   }
 
   get id() {
