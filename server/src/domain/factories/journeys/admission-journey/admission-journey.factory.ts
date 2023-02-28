@@ -10,7 +10,7 @@ import { FinishAdmissionJourneyHandler } from './events/handlers/finish-admissio
 import { AdmissionJourneyFinishedEvent } from './events/admission-journey-finished.event';
 import { JourneyActions } from '../../../value-objects/journey-actions.valueobject';
 import { IEventProcessor } from '../../../../adapters/event/processor.event';
-import { AvailableJourneys } from 'src/domain/types/available-journeys-slugs';
+import { AvailableJourneys } from '../../../types/available-journeys-slugs';
 
 interface AdmissionJourneyFactoryProps {
   dispatcher: IEventDispatcher;
