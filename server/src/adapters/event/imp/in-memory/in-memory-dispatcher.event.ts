@@ -30,4 +30,8 @@ export class InMemoryEventDispatcher implements IEventDispatcher {
   unregisterAll(): void {
     this.eventHandlers = {};
   }
+
+  process(): void {
+    console.info('no background processing in memory');
+  }
 }
