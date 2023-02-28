@@ -40,9 +40,12 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
         </h2>
         <h2 className='flex flex-col'>
           Jornada atual:
-          <select className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'>
+          <select
+            defaultValue={employee.journey?.slug}
+            className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+          >
             {journeys.map((j) => (
-              <option value={j.slug} key={j.slug} selected={j.slug === employee.journey?.slug}>
+              <option data-testid='select-option' value={j.slug} key={j.slug}>
                 {j.name}
               </option>
             ))}
