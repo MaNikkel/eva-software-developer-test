@@ -32,15 +32,7 @@ export class Journey {
     return this._name;
   }
 
-  addActionOnEvent(action: IEventHandler, eventName: string) {
-    this._dispatcher.register(eventName, action);
-  }
-
   start() {
     this._dispatcher.notify(this._startEvent);
-  }
-
-  clearActions() {
-    this._dispatcher.unregisterAll();
   }
 }

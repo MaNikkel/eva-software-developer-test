@@ -1,42 +1,47 @@
-import { AdmissionJourneyFactory } from '../admission-journey/admission-journey.factory';
-import { Journey } from 'src/domain/value-objects/journey.valueobject';
-import { IEventDispatcher } from 'src/adapters/event/dispatcher.event';
+import { InMemoryEventProcessor } from '../../../adapters/event/imp/in-memory/in-memory-processor.event';
+import { IEventDispatcher } from '../../../adapters/event/dispatcher.event';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
+import { IEventProcessor } from '../../../adapters/event/processor.event';
+import { JourneyActions } from '../../../domain/value-objects/journey-actions.valueobject';
+import { AdmissionJourneyFactory } from '../admission-journey/admission-journey.factory';
 
 describe('Admission Journey', () => {
   let eventDispatcher: IEventDispatcher;
+  let eventProcessor: IEventProcessor;
 
-  let journey: Journey;
+  let journeyActions: JourneyActions;
 
   beforeAll(() => {
     eventDispatcher = new InMemoryEventDispatcher();
+    eventProcessor = new InMemoryEventProcessor();
 
-    eventDispatcher.process();
+    // eventProcessor.process();
   });
 
-  afterEach(() => {
-    journey.clearActions();
-  });
   it('should create the journey', () => {
-    journey = new AdmissionJourneyFactory({
+    journeyActions = new AdmissionJourneyFactory({
       dispatcher: eventDispatcher,
+      processor: eventProcessor,
       data: { name: 'Dummy', registrationNumber: '123' },
     }).create();
 
-    expect(journey).toBeDefined();
+    expect(journeyActions).toBeDefined();
   });
 
   it('should start the admission journey', async () => {
     const logSpy = jest.spyOn(console, 'log');
 
-    journey = new AdmissionJourneyFactory({
+    journeyActions = new AdmissionJourneyFactory({
       dispatcher: eventDispatcher,
+      processor: eventProcessor,
       data: { name: 'Dummy', registrationNumber: '123' },
     }).create();
 
-    journey.start();
+    journeyActions.journey.start();
 
-    expect(journey).toBeDefined();
+    journeyActions.processor.process();
+
+    expect(journeyActions).toBeDefined();
     expect(logSpy).toHaveBeenCalledTimes(3);
     expect(logSpy).toHaveBeenCalledWith({
       name: 'Dummy',
