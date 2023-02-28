@@ -1,7 +1,12 @@
-import { populate } from './populate-employee.seed';
+import { populateEmployee } from './populate-employee.seed';
+import { populateJourneys } from './populate-journey.seed';
 
 async function seed() {
-  await populate();
+  await populateEmployee();
+  await populateJourneys();
+
+  console.info('Done!');
+  process.exit();
 }
 
 seed();

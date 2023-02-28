@@ -1,14 +1,13 @@
 import { Router } from 'express';
-import { journeys } from '../../instances/journeys.instance';
-import { Employee } from '../../../domain/entities/employee.entity';
-import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
+import { EmployeeController } from '../controllers/employee.controller';
 import { validate } from '../middleware/validation.middleware';
 import { employeeJourneySchema } from '../validation/link-employee-journey.schema';
-import { EmployeeController } from '../controllers/employee.controller';
 
 const router = Router();
 
 const controller = new EmployeeController();
+
+router.get('/', (req, res) => controller.getAllEmployees(req, res));
 
 router.post(
   '/:employeeId/journeys/:journeySlug',
