@@ -8,7 +8,7 @@ function App() {
     id: 'asfd',
     name: 'Mathias',
     registrationNumber: '1233',
-    // startDate: new Date(),
+    startDate: new Date(),
     // journey: {
     //   name: 'Test',
     //   slug: 'test',
