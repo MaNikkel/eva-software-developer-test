@@ -2,15 +2,16 @@ import { useState } from 'react'
 import { Employee } from '../../../types/employee.type'
 import { Button } from '../../atoms/Button'
 import DatePicker from 'react-datepicker'
-import { useJourneysStore } from '../../../hooks/store/use-journeys-store.store'
+import { useJourneysStore } from '../../../hooks/store/use-journeys-store.hook'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useEmployeesStore } from '../../../hooks/store/use-employees-store.hook'
 
 interface EmployeeItemProps {
   employee: Employee
 }
 
 type Inputs = {
-  startDate?: Date
+  startDate: Date
   journeySlug: string
 }
 
@@ -24,9 +25,10 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
   })
 
   const { journeys } = useJourneysStore()
+  const { linkJourneyToEmployee } = useEmployeesStore()
 
   const onSubmit: SubmitHandler<Inputs> = (data) =>
-    console.log(data.startDate?.toISOString(), data.journeySlug)
+    linkJourneyToEmployee(employee.id, data.journeySlug, data.startDate)
 
   const handleDateChange = (date: Date) => {
     if (date) {
@@ -41,7 +43,7 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
         className='flex justify-between max-w-screen-md  w-screen'
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className='flex flex-col'>
+        <div className='flex flex-col max-w-md w-72'>
           <h1 className='font-semibold text-2xl font-sans'>Nome: {employee.name}</h1>
           <h2 className='text-base text-gray-700'>Matrícula: {employee.registrationNumber}</h2>
         </div>

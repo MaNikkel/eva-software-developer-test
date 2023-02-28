@@ -1,24 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from './components/atoms/Button'
 import { EmployeeItem } from './components/molecules/EmployeeItem'
+import { useEmployeesStore } from './hooks/store/use-employees-store.hook'
+import { useJourneysStore } from './hooks/store/use-journeys-store.hook'
 import { Employee } from './types/employee.type'
 
 function App() {
-  const employee: Employee = {
-    id: 'asfd',
-    name: 'Mathias',
-    registrationNumber: '1233',
-    // startDate: new Date(),
-    journey: {
-      name: 'Test2',
-      slug: 'test2',
-    },
-  }
+  const { getAllEmployees, employees } = useEmployeesStore()
+  const { getAvailableJourneys } = useJourneysStore()
+
+  useEffect(() => {
+    Promise.all([getAllEmployees(), getAvailableJourneys()])
+  }, [])
 
   return (
     <>
-      <EmployeeItem employee={employee} />
-      <EmployeeItem employee={employee} />
+      {employees.map((e) => (
+        <EmployeeItem key={e.id} employee={e} />
+      ))}
     </>
   )
 }

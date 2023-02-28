@@ -1,6 +1,6 @@
 import { render, renderHook, screen, waitFor } from '@testing-library/react'
 import { EmployeeItem } from '.'
-import { useJourneysStore } from '../../../hooks/store/use-journeys-store.store'
+import { useJourneysStore } from '../../../hooks/store/use-journeys-store.hook'
 import { journeys } from '../../../mocks/msw/handlers/journeys'
 import { Employee } from '../../../types/employee.type'
 

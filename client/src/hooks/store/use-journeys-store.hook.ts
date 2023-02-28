@@ -8,10 +8,7 @@ interface JourneysStore {
 }
 
 export const useJourneysStore = create<JourneysStore>((set) => ({
-  journeys: [
-    { name: 'Test', slug: 'test' },
-    { name: 'Test2', slug: 'test2' },
-  ],
+  journeys: [],
 
   getAvailableJourneys: async () => {
     const { data } = await apiService.get<Journey[]>('/journeys')

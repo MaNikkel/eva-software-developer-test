@@ -1,0 +1,41 @@
+import { create } from 'zustand'
+import { apiService } from '../../services/api'
+import { Employee } from '../../types/employee.type'
+
+interface EmployeesStore {
+  employees: Employee[]
+  getAllEmployees: () => Promise<void>
+  linkJourneyToEmployee: (employeeId: string, journeySlug: string, startDate: Date) => Promise<void>
+}
+
+export const useEmployeesStore = create<EmployeesStore>((set) => ({
+  employees: [{ name: 'Test', id: '1', registrationNumber: '123' }],
+
+  linkJourneyToEmployee: async (employeeId: string, journeySlug: string, startDate: Date) => {
+    try {
+      const { data } = await apiService.post(`/employees/${employeeId}/journeys/${journeySlug}`, {
+        startDate: startDate.toISOString(),
+      })
+
+      set((state) => {
+        const updatedEmployees = state.employees.map((e) =>
+          e.id === employeeId ? { ...e, startDate } : e,
+        )
+
+        return {
+          employees: updatedEmployees,
+        }
+      })
+
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+  },
+
+  getAllEmployees: async () => {
+    const { data } = await apiService.get<Employee[]>('/employees')
+
+    set({ employees: data })
+  },
+}))
