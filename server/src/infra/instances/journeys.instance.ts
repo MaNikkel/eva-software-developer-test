@@ -2,7 +2,11 @@ import { JourneysFactory } from '../../domain/factories/journeys/journeys.factor
 import { eventDispatcher } from './event-dispatcher.instance';
 import { eventProcessor } from './event-processor.instance';
 
-export const journeys = new JourneysFactory({
+const journeys = new JourneysFactory({
   dispatcher: eventDispatcher,
   processor: eventProcessor,
 });
+
+journeys.create();
+
+export { journeys };

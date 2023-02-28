@@ -1,0 +1,64 @@
+version: '3.1'
+
+networks:
+  default:
+
+services:
+  api:
+    container_name: api
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=D3v_P4ss_S3CuR3
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_USER=root
+      - MONGO_PASS=mongopass
+    networks:
+      - default
+    build:
+      context: server
+      target: development
+    volumes:
+      - ./server:/usr/src/app
+    command: npm run dev
+    ports:
+      - 3333:3333
+  worker:
+    container_name: worker
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=D3v_P4ss_S3CuR3
+      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_USER=root
+      - MONGO_PASS=mongopass
+    networks:
+      - default
+    build:
+      context: server
+      target: development
+    volumes:
+      - ./server:/usr/src/app
+    command: npm run dev:worker
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongopass
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./tmp/data:/data/db
+    networks:
+      - default
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass D3v_P4ss_S3CuR3
+
+
+
+      
