@@ -4,16 +4,16 @@ import { Journey } from './journey.valueobject';
 
 interface JourneyActionsData {
   processor: IEventProcessor;
-  journey: Journey;
+  journeySlug: string;
   handlers: IEventHandler[];
 }
 
 export class JourneyActions {
   private _processor: IEventProcessor;
-  private _journey: Journey;
+  private _journeySlug: string;
 
-  constructor({ handlers, journey, processor }: JourneyActionsData) {
-    this._journey = journey;
+  constructor({ handlers, journeySlug, processor }: JourneyActionsData) {
+    this._journeySlug = journeySlug;
     this._processor = processor;
 
     this._processor.setHandlers(handlers);
@@ -21,8 +21,8 @@ export class JourneyActions {
     // console.log(this._processor.handlers);
   }
 
-  get journey() {
-    return this._journey;
+  get journeySlug() {
+    return this._journeySlug;
   }
 
   get processor() {

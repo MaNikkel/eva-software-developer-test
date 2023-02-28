@@ -14,7 +14,6 @@ import { IEventProcessor } from '../../../../adapters/event/processor.event';
 interface AdmissionJourneyFactoryProps {
   dispatcher: IEventDispatcher;
   processor: IEventProcessor;
-  data: EmployeeData;
 }
 
 export class AdmissionJourneyFactory {
@@ -22,25 +21,18 @@ export class AdmissionJourneyFactory {
   private _processor: IEventProcessor;
   private _startJourneyEvent: IEvent;
 
-  constructor({ dispatcher, data, processor }: AdmissionJourneyFactoryProps) {
+  private _journeyActions: JourneyActions;
+
+  private _journeySlug = 'admission-journey';
+
+  constructor({ dispatcher, processor }: AdmissionJourneyFactoryProps) {
     this._dispatcher = dispatcher;
     this._processor = processor;
 
-    this._startJourneyEvent = new AdmissionJourneyStartedEvent(data);
-  }
-
-  create(): JourneyActions {
-    const journey = new Journey({
-      slug: 'admission-journey',
-      name: 'Jornada da Admissão',
-      dispatcher: this._dispatcher,
-      startEvent: this._startJourneyEvent,
-    });
-
-    const journeyActions = new JourneyActions({
+    this._journeyActions = new JourneyActions({
       handlers: [
         new SendWelcomeEmailHandler(
-          this._startJourneyEvent.constructor.name,
+          AdmissionJourneyStartedEvent.name,
           this._dispatcher,
         ),
         new SendDocumentsRequestHandler(
@@ -52,8 +44,18 @@ export class AdmissionJourneyFactory {
           this._dispatcher,
         ),
       ],
-      journey,
+      journeySlug: this._journeySlug,
       processor: this._processor,
+    });
+  }
+
+  create(data: EmployeeData): Journey {
+    this._startJourneyEvent = new AdmissionJourneyStartedEvent(data);
+    const journey = new Journey({
+      slug: this._journeySlug,
+      name: 'Jornada da Admissão',
+      dispatcher: this._dispatcher,
+      startEvent: this._startJourneyEvent,
     });
 
     // journey.addActionOnEvent(
@@ -71,6 +73,10 @@ export class AdmissionJourneyFactory {
     //   AdmissionJourneyFinishedEvent.name,
     // );
 
-    return journeyActions;
+    return journey;
+  }
+
+  get journeyActions() {
+    return this._journeyActions;
   }
 }

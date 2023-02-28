@@ -1,6 +1,5 @@
 import express, { Response, Request } from 'express';
 import indexRouter from './routes';
-import { eventDispatcher } from './instances';
 const app = express();
 
 app.use(express.json());
