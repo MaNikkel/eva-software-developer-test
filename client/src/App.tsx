@@ -1,11 +1,8 @@
-import React from 'react';
+import React from 'react'
+import { Button } from './components/Button'
 
 function App() {
-  return (
-    <div className="text-center">
-      Hello
-    </div>
-  );
+  return <Button>asdfasdfasdf</Button>
 }
 
-export default App;
+export default App
