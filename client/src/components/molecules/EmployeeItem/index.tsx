@@ -3,19 +3,44 @@ import { Employee } from '../../../types/employee.type'
 import { Button } from '../../atoms/Button'
 import DatePicker from 'react-datepicker'
 import { useJourneysStore } from '../../../hooks/store/use-journeys-store.store'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface EmployeeItemProps {
   employee: Employee
 }
 
+type Inputs = {
+  startDate?: Date
+  journeySlug: string
+}
+
 export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date())
+  const currentDate = new Date()
+
+  const [startDate, setStartDate] = useState<Date | null>(currentDate)
+
+  const { register, handleSubmit, setValue } = useForm<Inputs>({
+    defaultValues: { startDate: employee?.startDate ? new Date(employee?.startDate) : currentDate },
+  })
 
   const { journeys } = useJourneysStore()
 
+  const onSubmit: SubmitHandler<Inputs> = (data) =>
+    console.log(data.startDate?.toISOString(), data.journeySlug)
+
+  const handleDateChange = (date: Date) => {
+    if (date) {
+      setStartDate(date)
+      setValue('startDate', date)
+    }
+  }
+
   return (
     <div className='border-2 rounded-md hover:bg-blue-50 border-zinc-900 m-2 p-1 flex justify-center'>
-      <div className='flex justify-between max-w-screen-md  w-screen'>
+      <form
+        className='flex justify-between max-w-screen-md  w-screen'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className='flex flex-col'>
           <h1 className='font-semibold text-2xl font-sans'>Nome: {employee.name}</h1>
           <h2 className='text-base text-gray-700'>Matrícula: {employee.registrationNumber}</h2>
@@ -29,18 +54,22 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
             </span>
           ) : (
             <DatePicker
-              locale='pt-BR'
+              // locale='pt-BR'
               customInput={
-                <input className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500' />
+                <input
+                  {...register('startDate')}
+                  className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+                />
               }
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={handleDateChange}
             />
           )}
         </h2>
         <h2 className='flex flex-col'>
           Jornada atual:
           <select
+            {...register('journeySlug')}
             defaultValue={employee.journey?.slug}
             className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           >
@@ -51,8 +80,8 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
             ))}
           </select>
         </h2>
-        <Button>Salvar</Button>
-      </div>
+        <Button type='submit'>Salvar</Button>
+      </form>
     </div>
   )
 }

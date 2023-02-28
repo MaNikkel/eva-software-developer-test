@@ -8,11 +8,11 @@ function App() {
     id: 'asfd',
     name: 'Mathias',
     registrationNumber: '1233',
-    startDate: new Date(),
-    // journey: {
-    //   name: 'Test',
-    //   slug: 'test',
-    // },
+    // startDate: new Date(),
+    journey: {
+      name: 'Test2',
+      slug: 'test2',
+    },
   }
 
   return (
