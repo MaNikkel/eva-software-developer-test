@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { journeys } from '../../instances/journeys.instance';
 import { Employee } from '../../../domain/entities/employee.entity';
-import { AvailableJourneys } from 'src/domain/types/available-journeys-slugs';
+import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
 
 const router = Router();
 

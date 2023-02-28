@@ -1,4 +1,4 @@
-import { AvailableJourneys } from 'src/domain/types/available-journeys-slugs';
+import { AvailableJourneys } from '../../types/available-journeys-slugs';
 import { IEventDispatcher } from '../../../adapters/event/dispatcher.event';
 import { IEventProcessor } from '../../../adapters/event/processor.event';
 import { EmployeeData } from '../../../domain/entities/employee.entity';
