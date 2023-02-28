@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb';
 import { IEvent } from '../../../../adapters/event/event';
 import { InMemoryEventDispatcher } from '../../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
-import { MongoClient } from '../../../../config/database/mongo-config';
+import { MongoClient } from '../../../config/database/mongo-config';
 import { Employee } from '../../../../domain/entities/employee.entity';
 import { Journey } from '../../../../domain/value-objects/journey.valueobject';
 import { EmployeeRepository } from '../../../../domain/repository/employee.repository';

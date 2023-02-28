@@ -1,5 +1,5 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
-import { MongoClient } from './src/config/database/mongo-config';
+import { MongoClient } from './src/infra/config/database/mongo-config';
 
 jest.setTimeout(20000);
 

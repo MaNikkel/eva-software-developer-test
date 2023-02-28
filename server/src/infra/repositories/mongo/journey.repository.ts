@@ -1,5 +1,5 @@
 import { Collection } from 'mongodb';
-import { MongoClient } from 'src/config/database/mongo-config';
+import { MongoClient } from 'src/infra/config/database/mongo-config';
 import { JourneyRepository } from '../../../domain/repository/journey.repository';
 
 export class MongoJourneyRepository implements JourneyRepository {

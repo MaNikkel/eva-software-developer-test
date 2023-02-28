@@ -1,5 +1,5 @@
 import { JourneyRepository } from '../../../../domain/repository/journey.repository';
-import { MongoClient } from '../../../../config/database/mongo-config';
+import { MongoClient } from '../../../config/database/mongo-config';
 import { MongoJourneyRepository } from '../journey.repository';
 import { Collection } from 'mongodb';
 
