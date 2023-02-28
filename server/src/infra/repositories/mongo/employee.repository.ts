@@ -1,8 +1,9 @@
 import { Collection } from 'mongodb';
-import { MongoClient } from '../../config/database/mongo-config';
 import { Employee } from '../../../domain/entities/employee.entity';
-import { Journey } from '../../../domain/value-objects/journey.valueobject';
 import { EmployeeRepository } from '../../../domain/repository/employee.repository';
+import { Journey } from '../../../domain/value-objects/journey.valueobject';
+import { MongoClient } from '../../config/database/mongo-config';
+import { journeys } from '../../instances/journeys.instance';
 
 export class MongoEmployeeRepository implements EmployeeRepository {
   private employeeCollection: Collection;
@@ -50,15 +51,20 @@ export class MongoEmployeeRepository implements EmployeeRepository {
   async listAll(): Promise<Employee[]> {
     const result = await this.employeeCollection.find().toArray();
 
-    return result.map(
-      (e) =>
-        new Employee({
-          id: e.id,
-          name: e.name,
-          registrationNumber: e.registration_number,
-          startDate: new Date(e.start_date),
-        }),
-    );
+    return result.map((e) => {
+      const result = new Employee({
+        id: e.id,
+        name: e.name,
+        registrationNumber: e.registration_number,
+        startDate: new Date(e.start_date),
+      });
+
+      const journey = journeys.createJourney(e.journey.slug, result);
+
+      result.linkJourney(journey);
+
+      return result;
+    });
   }
   async linkJourney(id: string, journey: Journey): Promise<void> {
     await this.employeeCollection.findOneAndUpdate(

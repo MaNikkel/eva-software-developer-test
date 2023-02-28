@@ -6,6 +6,17 @@ export class ListAllEmployeesService {
   async execute() {
     const employees = await this.employeeRepository.listAll();
 
-    return employees;
+    const presenter = employees.map((e) => ({
+      name: e.name,
+      registrationNumber: e.registrationNumber,
+      id: e.id,
+      startDate: e.startDate,
+      journey: {
+        slug: e?.journey?.slug,
+        name: e?.journey?.name,
+      },
+    }));
+
+    return presenter;
   }
 }
