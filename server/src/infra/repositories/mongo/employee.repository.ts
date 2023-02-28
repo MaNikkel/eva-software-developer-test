@@ -25,6 +25,10 @@ export class MongoEmployeeRepository implements EmployeeRepository {
   async getById(id: string): Promise<Employee> {
     const data = await this.employeeCollection.findOne({ id: id });
 
+    if (!data) {
+      return null;
+    }
+
     return new Employee({
       id: data.id,
       name: data.name,

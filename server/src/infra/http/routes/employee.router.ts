@@ -4,8 +4,11 @@ import { Employee } from '../../../domain/entities/employee.entity';
 import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
 import { validate } from '../middleware/validation.middleware';
 import { employeeJourneySchema } from '../validation/link-employee-journey.schema';
+import { EmployeeController } from '../controllers/employee.controller';
 
 const router = Router();
+
+const controller = new EmployeeController();
 
 router.post(
   '/:employeeId/journeys/:journeySlug',
@@ -15,20 +18,7 @@ router.post(
       journeySlug: req.params.journeySlug,
     })(res, next),
   (req, res) => {
-    const employee = new Employee({
-      name: 'test',
-      registrationNumber: 'test',
-      id: req.params.employeeId,
-    });
-
-    const journey = journeys.createJourney(
-      AvailableJourneys.ADMISSION,
-      employee,
-    );
-
-    journey.start();
-
-    return res.status(201).json({ ok: true });
+    controller.linkJourney(req, res);
   },
 );
 
