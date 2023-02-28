@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { journeys } from '../../instances/journeys.instance';
 import { Employee } from '../../../domain/entities/employee.entity';
+import { AvailableJourneys } from 'src/domain/types/available-journeys-slugs';
 
 const router = Router();
 
@@ -14,7 +15,7 @@ router.post('/:employeeId/journeys/:journeySlug', (req, res) => {
     id: req.params.employeeId,
   });
 
-  const journey = journeys.createJourney('admission-journey', employee);
+  const journey = journeys.createJourney(AvailableJourneys.ADMISSION, employee);
 
   journey.start();
 

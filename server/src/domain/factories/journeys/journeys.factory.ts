@@ -1,3 +1,4 @@
+import { AvailableJourneys } from 'src/domain/types/available-journeys-slugs';
 import { IEventDispatcher } from '../../../adapters/event/dispatcher.event';
 import { IEventProcessor } from '../../../adapters/event/processor.event';
 import { EmployeeData } from '../../../domain/entities/employee.entity';
@@ -33,9 +34,9 @@ export class JourneysFactory {
       this._admissionJourneyFactory.journeyActions.processor;
   }
 
-  createJourney(slug: string, data: EmployeeData) {
+  createJourney(slug: AvailableJourneys, data: EmployeeData) {
     switch (slug) {
-      case 'admission-journey':
+      case AvailableJourneys.ADMISSION:
         return this._admissionJourneyFactory.create(data);
     }
   }
