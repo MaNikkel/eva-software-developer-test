@@ -4,7 +4,7 @@ import { IEventProcessor } from '../../processor.event';
 export class BullEventProcessor extends IEventProcessor {
   process() {
     new Worker(
-      'dispatcher',
+      'queue',
       async (job) => {
         const handler = this._handlers.find((h) => h.eventName === job.name);
 
