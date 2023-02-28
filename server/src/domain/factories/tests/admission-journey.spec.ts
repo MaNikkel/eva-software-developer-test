@@ -3,7 +3,7 @@ import { IEventDispatcher } from '../../../adapters/event/dispatcher.event';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
 import { IEventProcessor } from '../../../adapters/event/processor.event';
 import { JourneyActions } from '../../../domain/value-objects/journey-actions.valueobject';
-import { AdmissionJourneyFactory } from '../admission-journey/admission-journey.factory';
+import { AdmissionJourneyFactory } from '../journeys/admission-journey/admission-journey.factory';
 
 describe('Admission Journey', () => {
   let eventDispatcher: IEventDispatcher;

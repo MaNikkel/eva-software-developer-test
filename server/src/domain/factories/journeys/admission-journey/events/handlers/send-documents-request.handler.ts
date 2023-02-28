@@ -1,5 +1,5 @@
-import { IEventDispatcher } from '../../../../../adapters/event/dispatcher.event';
-import { IEventHandler } from '../../../../../adapters/event/handler.event';
+import { IEventDispatcher } from '../../../../../../adapters/event/dispatcher.event';
+import { IEventHandler } from '../../../../../../adapters/event/handler.event';
 import { AdmissionJourneyFinishedEvent } from '../admission-journey-finished.event';
 import { AdmissionJourneyStartedEvent } from '../admission-journey-started.event';
 

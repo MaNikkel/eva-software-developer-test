@@ -1,15 +1,15 @@
-import { IEventDispatcher } from '../../../adapters/event/dispatcher.event';
-import { IEvent } from '../../../adapters/event/event';
-import { EmployeeData } from '../../entities/employee.entity';
-import { Journey } from '../../value-objects/journey.valueobject';
+import { IEventDispatcher } from '../../../../adapters/event/dispatcher.event';
+import { IEvent } from '../../../../adapters/event/event';
+import { EmployeeData } from '../../../entities/employee.entity';
+import { Journey } from '../../../value-objects/journey.valueobject';
 import { SendWelcomeEmailHandler } from './events/handlers/send-welcome-email.handler';
 import { AdmissionJourneyStartedEvent } from './events/admission-journey-started.event';
 import { SendDocumentsRequestHandler } from './events/handlers/send-documents-request.handler';
 import { AdmissionJourneyWelcomeEmailSendEvent } from './events/admission-journey-welcome-email-send.event';
 import { FinishAdmissionJourneyHandler } from './events/handlers/finish-admission-journey.handler';
 import { AdmissionJourneyFinishedEvent } from './events/admission-journey-finished.event';
-import { JourneyActions } from '../../value-objects/journey-actions.valueobject';
-import { IEventProcessor } from '../../../adapters/event/processor.event';
+import { JourneyActions } from '../../../value-objects/journey-actions.valueobject';
+import { IEventProcessor } from '../../../../adapters/event/processor.event';
 
 interface AdmissionJourneyFactoryProps {
   dispatcher: IEventDispatcher;
