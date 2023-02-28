@@ -26,10 +26,12 @@ export class EmployeeController {
       await this._linkJourneyToEmployeeService.execute({
         employeeId: req.params.employeeId,
         journeySlug: <AvailableJourneys>req.params.journeySlug,
+        startDate: new Date(req.body.startDate),
       });
 
       return res.status(200).json({ ok: true });
     } catch (err) {
+      console.error(err);
       if (err instanceof EmployeeNotFoundError) {
         return res.status(404).json(err);
       }

@@ -6,4 +6,5 @@ export interface EmployeeRepository {
   getById(id: string): Promise<Employee>;
   listAll(): Promise<Employee[]>;
   linkJourney(id: string, journey: Journey): Promise<void>;
+  setStartDate(id: string, date: Date): Promise<void>;
 }

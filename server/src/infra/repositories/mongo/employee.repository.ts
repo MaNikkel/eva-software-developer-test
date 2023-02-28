@@ -11,6 +11,17 @@ export class MongoEmployeeRepository implements EmployeeRepository {
     this.employeeCollection = this.mongoClient.getDb().collection('employee');
   }
 
+  async setStartDate(id: string, date: Date): Promise<void> {
+    await this.employeeCollection.findOneAndUpdate(
+      { id: id },
+      {
+        $set: {
+          start_date: date.toISOString(),
+        },
+      },
+    );
+  }
+
   async create(employee: Employee): Promise<void> {
     await this.employeeCollection.insertOne({
       id: employee.id,
@@ -33,6 +44,7 @@ export class MongoEmployeeRepository implements EmployeeRepository {
       id: data.id,
       name: data.name,
       registrationNumber: data.registration_number,
+      startDate: new Date(data.start_date),
     });
   }
   async listAll(): Promise<Employee[]> {
@@ -44,6 +56,7 @@ export class MongoEmployeeRepository implements EmployeeRepository {
           id: e.id,
           name: e.name,
           registrationNumber: e.registration_number,
+          startDate: new Date(e.start_date),
         }),
     );
   }

@@ -58,11 +58,15 @@ describe('Mongo Employee Repository', () => {
     expect(employee.name).toBe(mockEmployee.name);
   });
 
-  it('should create a new employee and add a journey to it', async () => {
+  it('should create a new employee and add a journey and date to it', async () => {
+    const date = new Date();
+
     const employee = new Employee({
       name: 'joe doe',
       registrationNumber: '12333',
     });
+
+    employee.defineStartDate(date);
 
     await employeeRepository.create(employee);
 
@@ -72,13 +76,16 @@ describe('Mongo Employee Repository', () => {
     expect(data.registration_number).toBe(employee.registrationNumber);
     expect(data.journey.slug).toBeNull();
     expect(data.journey.name).toBeNull();
+    expect(data.start_date).toBeUndefined();
 
     employee.linkJourney(mockJourney);
 
     await employeeRepository.linkJourney(employee.id, employee.journey);
+    await employeeRepository.setStartDate(employee.id, date);
 
     data = await collection.findOne({ id: employee.id });
     expect(data.journey.slug).toBe(mockJourney.slug);
     expect(data.journey.name).toBe(mockJourney.name);
+    expect(data.start_date).toBe(date.toISOString());
   });
 });

@@ -3,6 +3,7 @@ import { Journey } from '../value-objects/journey.valueobject';
 
 export interface EmployeeData {
   id?: string;
+  startDate?: Date;
   name: string;
   registrationNumber: string;
 }
@@ -12,11 +13,13 @@ export class Employee {
   private _name: string;
   private _registrationNumber: string;
   private _journey?: Journey;
+  private _startDate?: Date;
 
-  constructor({ name, registrationNumber, id }: EmployeeData) {
+  constructor({ name, registrationNumber, id, startDate }: EmployeeData) {
     this._id = id ?? randomUUID();
     this._name = name;
     this._registrationNumber = registrationNumber;
+    this._startDate = startDate;
   }
 
   get name(): string {
@@ -33,6 +36,14 @@ export class Employee {
 
   get journey(): Journey | undefined {
     return this._journey;
+  }
+
+  get startDate() {
+    return this._startDate;
+  }
+
+  public defineStartDate(date: Date) {
+    this._startDate = date;
   }
 
   public linkJourney(journey: Journey): void {

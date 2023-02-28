@@ -15,6 +15,7 @@ router.post(
     validate(employeeJourneySchema, {
       employeeId: req.params.employeeId,
       journeySlug: req.params.journeySlug,
+      startDate: req.body.startDate,
     })(res, next),
   (req, res) => {
     controller.linkJourney(req, res);

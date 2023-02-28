@@ -9,7 +9,11 @@ export class LinkJourneyToEmployeeService {
     private journeysFactory: JourneysFactory,
   ) {}
 
-  async execute({ employeeId, journeySlug }: LinkJourneyToEmployeeDto) {
+  async execute({
+    employeeId,
+    journeySlug,
+    startDate,
+  }: LinkJourneyToEmployeeDto) {
     const employee = await this.employeeRepository.getById(employeeId);
 
     if (!employee) {
@@ -22,8 +26,11 @@ export class LinkJourneyToEmployeeService {
       id: employee.id,
     });
 
+    employee.defineStartDate(startDate);
+
     employee.linkJourney(journey);
 
+    await this.employeeRepository.setStartDate(employee.id, startDate);
     await this.employeeRepository.linkJourney(employee.id, journey);
 
     employee.journey?.start();
