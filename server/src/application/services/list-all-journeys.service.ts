@@ -6,8 +6,6 @@ export class ListAllJourneysService {
   async execute() {
     const journeys = await this.journeyRepository.listAll();
 
-    console.log(journeys);
-
     return journeys;
   }
 }
