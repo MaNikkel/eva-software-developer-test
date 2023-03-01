@@ -17,8 +17,6 @@ export class JourneyActions {
     this._processor = processor;
 
     this._processor.setHandlers(handlers);
-
-    // console.log(this._processor.handlers);
   }
 
   get journeySlug() {

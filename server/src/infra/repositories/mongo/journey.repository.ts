@@ -19,8 +19,6 @@ export class MongoJourneyRepository implements JourneyRepository {
   async listAll(): Promise<{ name: string; slug: string }[]> {
     const result = await this.journeyCollection.find().toArray();
 
-    console.log(result);
-
     return result.map((r) => ({ slug: r?.slug, name: r?.name }));
   }
 }
