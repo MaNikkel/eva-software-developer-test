@@ -13,7 +13,7 @@ export const useEmployeesStore = create<EmployeesStore>((set) => ({
 
   linkJourneyToEmployee: async (employeeId: string, journeySlug: string, startDate: Date) => {
     try {
-      const { data } = await apiService.post(`/employees/${employeeId}/journeys/${journeySlug}`, {
+      await apiService.post(`/employees/${employeeId}/journeys/${journeySlug}`, {
         startDate: startDate.toISOString(),
       })
 
@@ -26,8 +26,6 @@ export const useEmployeesStore = create<EmployeesStore>((set) => ({
           employees: updatedEmployees,
         }
       })
-
-      console.log(data)
     } catch (err) {
       console.log(err)
     }
