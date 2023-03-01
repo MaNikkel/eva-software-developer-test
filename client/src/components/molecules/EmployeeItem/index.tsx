@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Employee } from '../../../types/employee.type'
 import { Button } from '../../atoms/Button'
 import DatePicker from 'react-datepicker'
@@ -26,11 +26,13 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
   const { register, handleSubmit, setValue } = useForm<Inputs>({
     defaultValues: {
       startDate: employee?.startDate ? new Date(employee?.startDate) : currentDate,
+      // journeySlug: journeys[0]?.slug,
     },
   })
 
-  const onSubmit: SubmitHandler<Inputs> = (data) =>
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     linkJourneyToEmployee(employee.id, data.journeySlug, data.startDate)
+  }
 
   const handleDateChange = (date: Date) => {
     if (date) {
@@ -38,6 +40,11 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
       setValue('startDate', date)
     }
   }
+
+  useEffect(() => {
+    if (employee?.journey?.slug) setValue('journeySlug', employee?.journey?.slug)
+    else if (journeys[0]?.slug) setValue('journeySlug', journeys[0]?.slug)
+  }, [employee?.journey, journeys])
 
   return (
     <div className='border-2 rounded-md hover:bg-blue-50 border-zinc-900 m-2 p-1 flex justify-center'>
@@ -74,7 +81,7 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
           Jornada atual:
           <select
             {...register('journeySlug')}
-            defaultValue={employee.journey?.slug || journeys[0]?.slug}
+            defaultValue={employee?.journey?.slug}
             className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           >
             {journeys.map((j) => (
