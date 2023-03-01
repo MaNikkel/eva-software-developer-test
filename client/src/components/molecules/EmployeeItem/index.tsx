@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Employee } from '../../../types/employee.type'
 import { Button } from '../../atoms/Button'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import { useJourneysStore } from '../../../hooks/store/use-journeys-store.hook'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useEmployeesStore } from '../../../hooks/store/use-employees-store.hook'
+import ptBR from 'date-fns/locale/pt-BR'
+
+registerLocale('pt-BR', ptBR)
 
 interface EmployeeItemProps {
   employee: Employee
@@ -65,7 +68,7 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
             </span>
           ) : (
             <DatePicker
-              // locale='pt-BR'
+              locale='pt-BR'
               customInput={
                 <input
                   {...register('startDate')}
