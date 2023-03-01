@@ -1,12 +1,7 @@
+import { Employee } from '../../../domain/entities/employee.entity';
+import { EmployeeRepository } from '../../../domain/repository/employee.repository';
 import { MongoClient } from '../../../infra/config/database/mongo-config';
 import { MongoEmployeeRepository } from '../../../infra/repositories/mongo/employee.repository';
-import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
-import { InMemoryEventProcessor } from '../../../adapters/event/imp/in-memory/in-memory-processor.event';
-import { JourneysFactory } from '../../../domain/factories/journeys/journeys.factory';
-import { EmployeeRepository } from '../../../domain/repository/employee.repository';
-import { Employee } from '../../../domain/entities/employee.entity';
-import { LinkJourneyToEmployeeService } from '../link-journey-to-employee.service';
-import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
 import { ListAllEmployeesService } from '../list-all-employees.service';
 
 describe('ListAllEmployeesService', () => {

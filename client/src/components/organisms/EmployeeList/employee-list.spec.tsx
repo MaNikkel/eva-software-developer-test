@@ -1,9 +1,6 @@
-import { render, renderHook, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, renderHook, screen } from '@testing-library/react'
 import { EmployeeList } from '.'
 import { useEmployeesStore } from '../../../hooks/store/use-employees-store.hook'
-import { useJourneysStore } from '../../../hooks/store/use-journeys-store.hook'
-import { journeys } from '../../../mocks/msw/handlers/journeys'
 
 describe('EmployeeList', () => {
   const setup = () => {

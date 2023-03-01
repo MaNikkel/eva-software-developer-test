@@ -59,21 +59,6 @@ export class AdmissionJourneyFactory {
       startEvent: this._startJourneyEvent,
     });
 
-    // journey.addActionOnEvent(
-    //   new SendWelcomeEmailHandler(this._dispatcher),
-    //   this._startJourneyEvent.constructor.name,
-    // );
-
-    // journey.addActionOnEvent(
-    //   new SendDocumentsRequestHandler(this._dispatcher),
-    //   AdmissionJourneyWelcomeEmailSendEvent.name,
-    // );
-
-    // journey.addActionOnEvent(
-    //   new FinishAdmissionJourneyHandler(this._dispatcher),
-    //   AdmissionJourneyFinishedEvent.name,
-    // );
-
     return journey;
   }
 

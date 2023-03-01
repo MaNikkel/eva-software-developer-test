@@ -1,6 +1,5 @@
 import { IEventHandler } from 'src/adapters/event/handler.event';
 import { IEventProcessor } from 'src/adapters/event/processor.event';
-import { Journey } from './journey.valueobject';
 
 interface JourneyActionsData {
   processor: IEventProcessor;

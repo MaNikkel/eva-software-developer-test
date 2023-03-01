@@ -1,11 +1,10 @@
 import { IEvent } from '../../../adapters/event/event';
 import { InMemoryEventDispatcher } from '../../../adapters/event/imp/in-memory/in-memory-dispatcher.event';
-import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
 import { JourneyRepository } from '../../../domain/repository/journey.repository';
+import { AvailableJourneys } from '../../../domain/types/available-journeys-slugs';
 import { Journey } from '../../../domain/value-objects/journey.valueobject';
 import { MongoClient } from '../../../infra/config/database/mongo-config';
 import { MongoJourneyRepository } from '../../../infra/repositories/mongo/journey.repository';
-import { ListAllEmployeesService } from '../list-all-employees.service';
 import { ListAllJourneysService } from '../list-all-journeys.service';
 
 describe('ListAllJourneysService', () => {

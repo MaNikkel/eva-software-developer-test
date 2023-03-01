@@ -14,8 +14,6 @@ describe('Admission Journey', () => {
   beforeAll(() => {
     eventDispatcher = new InMemoryEventDispatcher();
     eventProcessor = new InMemoryEventProcessor();
-
-    // eventProcessor.process();
   });
 
   it('should create the journey', () => {

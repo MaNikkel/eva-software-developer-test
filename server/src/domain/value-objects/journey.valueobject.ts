@@ -1,7 +1,5 @@
-import { randomUUID } from 'crypto';
-import { IEvent } from '../../adapters/event/event';
 import { IEventDispatcher } from '../../adapters/event/dispatcher.event';
-import { IEventHandler } from '../../adapters/event/handler.event';
+import { IEvent } from '../../adapters/event/event';
 
 interface JourneyProps {
   slug: string;
