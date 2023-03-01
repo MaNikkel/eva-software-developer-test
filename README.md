@@ -1,41 +1,69 @@
-# Descrição do teste para a vaga de Software Developer
+# Teste para a vaga de Software Developer
 
-Na Eva temos 2 principais recursos do sistema: colaboradores e jornadas.
+- Essa aplicação implementa o [desafio proposto](./ASSIGNMENT.md)
 
-- Jornadas são sequências de ações a serem executadas pelo sistema.
-- Ações são, por exemplo: envio de email, envio de mensagem no whatsapp, requisição para uma API xyz, etc.
+- Para cumprir o desafio, foram usadas as tecnologias e ferramentas:
 
-## Problema 
-Dado um colaborador e uma jornada já criadas, crie uma API rest que permita associar uma jornada e uma data de início a um colaborador já cadastrado. Uma vez associada a jornada, as ações devem ser executadas por um job em background.
+  - Express para servidor HTTP
+  - BullMQ como fila de mensagens
+  - MongoDB como banco
+  - Typescript (Backend e Frontend)
+  - React usando Create React App
+  - Tailwindcss
 
-Para o frontend, o básico é conseguir realizar a ação de disparar a jornada para o colaborador. Fique à vontade para incrementar onde necessário.
+- Para os testes, foram utilizados:
+  - jest (Backend e Frontend)
+  - React Testing Library
+  - MSW para mock de api no front
 
-#### Direcionamentos
-- A definição dos modelos de colaborador e jornada fica a seu critério
-- Não precisa se preocupar com o CRUD completo dos recursos, crie de acordo com sua necessidade
-- As ações não precisam fazer chamadas reais a APIs, pode mockar o que for preciso
+# Arquitetura
 
-#### Pontos de avaliação
-- Definição dos modelos/schemas
-- Organização do projeto (arquivos e arquitetura)
-- Clareza do código
-- Testes unitários
-- Documentação
+- O projeto se baseia numa arquitetura de adaptadores e padrões do DDD
+  - Adapters serve como camada de desacoplamento das regras de negócio de implementações concretas
+  - Domain segura todas as regras principais do projeto, nela se encontram as jornadas disponíveis dentro de factories
+  - Infra faz a implementação da Complexidade Acidental do projeto (Banco de Dados, camada HTTP, Worker da fila etc)
+  - Application orquestra a ordem que as operações devem ser processadas
 
-## Entregável
-Link pro repositório público com o teste. Espero um sistema funcional e documentado em:
-- como executar localmente
-- como executar os testes unitários
-- setups específicos necessários para a execução
-- [OPCIONAL] se tiver o sistema rodando em alguma cloud é bônus, mas **não é requisito**
+# Testes
 
-#### Informações sobre o nosso contexto
-- Usamos arquitetura hexagonal
-- Usamos bastante programação funcional e Promises/asyncs do Javascript
-- Tecnologias/bibliotecas que utilizamos
-  - MongoDB
-  - [Joi](https://joi.dev/) pra validação de schemas
-  - [BullJS](https://github.com/OptimalBits/bull) para jobs em background
-  - Jest
-  - React (componentes funcionais, React hooks) + [TailwindCSS](https://v2.tailwindcss.com/)
-  - [TailwindUI](https://tailwindui.com/components) para biblioteca de componentes para o frontend
+- Para rodar os testes unitários, temos um comando para o client e outro para o server:
+  - `npm run -w server test`
+  - `npm run -w client test`
+
+# Iniciando o projeto
+
+- Pré requisitos:
+
+  - docker
+  - docker compose
+
+- Com os requisitos atendidos, basta rodar:
+
+  - `docker compose up` ou `docker compose up -d`
+
+- Para encerrar:
+
+  - `docker comose down`
+
+- Caso queira recriar os dados do banco, basta rodar:
+  - `docker compose up seed -d` ou `docker compose exec api npm run seed`
+
+# O que pode ser melhorado
+
+- Erros
+
+  - nem todos os possíveis erros estão sendo tratados no back, o que poderia ser melhorado visando uma estabilidade maior
+  - no front não está previsto tratamento de erros, poderia ser usada uma estratégia para dar um feedback ao usuário via toast
+
+- UX
+
+  - O front conta apenas com um design simples sem micro experiências de UX (loading, feeadback etc) o que poderia agregar valor
+
+- Criação dinâmica de jornadas
+  - No momento as jornadas estão sendo criadas via código por meio de factories, porém poderia ser adicionada uma granularidade maior e deixar com que o usuário final possa criar as jornadas baseado em ações iniciais
+
+# Demo
+
+<video  controls>
+  <source src="./docs/demo.mov" type="video/mp4">
+</video>

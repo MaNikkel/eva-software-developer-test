@@ -1,0 +1,13 @@
+{
+  "name": "eva-software-developer-test",
+  "version": "1.0.0",
+  "description": "- Essa aplicação implementa o [desafio proposto]('./ASSIGNMENT.md')",
+  "main": "index.js",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
