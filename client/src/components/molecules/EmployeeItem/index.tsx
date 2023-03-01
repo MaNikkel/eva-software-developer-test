@@ -20,12 +20,14 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
 
   const [startDate, setStartDate] = useState<Date | null>(currentDate)
 
-  const { register, handleSubmit, setValue } = useForm<Inputs>({
-    defaultValues: { startDate: employee?.startDate ? new Date(employee?.startDate) : currentDate },
-  })
-
   const { journeys } = useJourneysStore()
   const { linkJourneyToEmployee } = useEmployeesStore()
+
+  const { register, handleSubmit, setValue } = useForm<Inputs>({
+    defaultValues: {
+      startDate: employee?.startDate ? new Date(employee?.startDate) : currentDate,
+    },
+  })
 
   const onSubmit: SubmitHandler<Inputs> = (data) =>
     linkJourneyToEmployee(employee.id, data.journeySlug, data.startDate)
@@ -72,7 +74,7 @@ export const EmployeeItem: React.FC<EmployeeItemProps> = ({ employee }) => {
           Jornada atual:
           <select
             {...register('journeySlug')}
-            defaultValue={employee.journey?.slug}
+            defaultValue={employee.journey?.slug || journeys[0]?.slug}
             className='block appearance-none w-36 h-10 bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           >
             {journeys.map((j) => (

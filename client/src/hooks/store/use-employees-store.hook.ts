@@ -9,7 +9,7 @@ interface EmployeesStore {
 }
 
 export const useEmployeesStore = create<EmployeesStore>((set) => ({
-  employees: [{ name: 'Test', id: '1', registrationNumber: '123' }],
+  employees: [],
 
   linkJourneyToEmployee: async (employeeId: string, journeySlug: string, startDate: Date) => {
     try {
